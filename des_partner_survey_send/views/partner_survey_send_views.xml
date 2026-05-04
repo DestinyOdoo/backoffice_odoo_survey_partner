@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_partner_survey_send_tree" model="ir.ui.view">
+        <field name="name">partner.survey.send.tree</field>
+        <field name="model">partner.survey.send</field>
+        <field name="arch" type="xml">
+            <tree string="Surveys to Send" editable="bottom">
+                <field name="partner_id"/>
+                <field name="survey_user_input_id" domain="[('state', '=', 'done'), '|', ('assigned', '=', False), ('id', '=', survey_user_input_id)]"/>
+                <field name="survey_name"/>
+                <field name="survey_input_state" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'sent'"
+                       decoration-warning="state == 'pending'"/>
+                <field name="sent_date"/>
+                <button name="action_send" type="object" string="Send" icon="fa-envelope"
+                        invisible="state == 'sent' or survey_user_input_id.state != 'done'"
+                        class="btn-link"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_partner_survey_send_form" model="ir.ui.view">
+        <field name="name">partner.survey.send.form</field>
+        <field name="model">partner.survey.send</field>
+        <field name="arch" type="xml">
+            <form string="Survey Send" edit="state != 'sent'" delete="state != 'sent'">
+                <sheet>
+                    <group readonly="state == 'sent'">
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="survey_user_input_id" domain="[('state', '=', 'done'), '|', ('assigned', '=', False), ('id', '=', survey_user_input_id)]"/>
+                            <field name="survey_name"/>
+                            <field name="state" widget="statusbar" statusbar_visible="pending,sent"/>
+                            <field name="sent_date" invisible="state != 'sent'"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_send" string="Send Survey" type="object"
+                                class="btn-primary" icon="fa-envelope"
+                                invisible="state == 'sent' or survey_user_input_id.state != 'done'"/>
+                        <button name="action_reset_to_pending" string="Mark as Pending"
+                                type="object" class="btn-secondary"
+                                invisible="state != 'sent'"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_partner_survey_send" model="ir.actions.act_window">
+        <field name="name">Surveys to Send</field>
+        <field name="res_model">partner.survey.send</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_pending': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new survey send line from a contact.
+            </p>
+        </field>
+    </record>
+</odoo>

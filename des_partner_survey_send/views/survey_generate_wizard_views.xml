@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_survey_generate_wizard_form" model="ir.ui.view">
+        <field name="name">survey.generate.wizard.form</field>
+        <field name="model">survey.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Survey for Contact">
+                <group>
+                    <field name="survey_id"/>
+                    <field name="partner_id" options="{'no_create': False}"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Continue to Survey" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,143 @@
+<odoo>
+    <record id="partner_survey_invitation_email" model="mail.template">
+        <field name="name">Professional Survey Invitation</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="email_from">{{(object.company_id.email or user.email)}}</field>
+        <field name="email_to">{{object.email}}</field>
+        <field name="subject">Your Feedback Matters: Invitation to Participate in Our Survey</field>
+        <field name="body_html" type="html">
+            <t t-name="survey_invitation_email">
+                <div style="max-width: 600px; margin: 0 auto; font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <div style="background-color: #f4f4f4; padding: 20px; text-align: center; margin-bottom: 20px;">
+                        <img t-att-src="object.company_id.logo" alt="Company Logo"
+                             style="max-height: 50px; max-width: 200px;"/>
+                    </div>
+
+                    <div style="padding: 0 20px;">
+                        <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                            Dear <t t-out="object.name"/>,
+                        </h2>
+
+                        <p>We are reaching out to request your valuable input through a brief survey designed to help us
+                            continuously improve our services and customer experience.
+                        </p>
+
+                        <div style="background-color: #f9f9f9; border-left: 4px solid #3498db; padding: 10px; margin: 15px 0;">
+                            <strong>Survey Details:</strong>
+                            <p style="margin: 5px 0;">
+                                Survey:
+                                <t t-out="ctx.get('survey_name')"/>
+                                <br/>
+                            </p>
+                        </div>
+
+                        <p style="text-align: center; margin: 25px 0;">
+                            <a t-att-href="ctx.get('survey_url')" style="display: inline-block; background-color: #3498db; color: white; padding: 12px 25px;
+                           text-decoration: none; border-radius: 5px; font-weight: bold; text-transform: uppercase;
+                           box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: background-color 0.3s ease;">
+                                Complete Survey
+                            </a>
+                        </p>
+
+                        <p>Your participation is crucial and will take approximately
+                            <t t-out="ctx.get('estimated_time', '5 minutes')"/>
+                            to complete. We value your time and feedback.
+                        </p>
+
+                        <p style="font-style: italic; color: #7f8c8d; margin-top: 20px;">
+                            If you have any questions about this survey, please contact us at
+                            <t t-out="object.company_id.email"/>
+                            or reply to this email.
+                        </p>
+
+                        <p style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ecf0f1;">
+                            Best regards,
+                            <br/>
+                            <strong>
+                                <t t-out="object.company_id.name"/>
+                                Team
+                            </strong>
+                        </p>
+                    </div>
+
+                    <div style="background-color: #f4f4f4; color: #7f8c8d; text-align: center; padding: 10px; font-size: 0.8em; margin-top: 20px;">
+                        ©
+                        <t t-out="ctx.get('current_year', '2024')"/>
+                        <t t-out="object.company_id.name"/>. All rights reserved.
+                    </div>
+                </div>
+            </t>
+        </field>
+    </record>
+
+    <record id="partner_completed_survey_email" model="mail.template">
+        <field name="name">Completed Survey - Share with Contact</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="email_from">{{(object.company_id.email or user.email)}}</field>
+        <field name="email_to">{{object.email}}</field>
+        <field name="subject">Survey Results: {{ctx.get('survey_name', 'Survey')}}</field>
+        <field name="body_html" type="html">
+            <t t-name="completed_survey_email">
+                <div style="max-width: 600px; margin: 0 auto; font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <div style="background-color: #f4f4f4; padding: 20px; text-align: center; margin-bottom: 20px;">
+                        <img t-att-src="object.company_id.logo" alt="Company Logo"
+                             style="max-height: 50px; max-width: 200px;"/>
+                    </div>
+
+                    <div style="padding: 0 20px;">
+                        <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
+                            Dear <t t-out="object.name"/>,
+                        </h2>
+
+                        <p>Please find below the completed survey results for your reference.</p>
+
+                        <div style="background-color: #f9f9f9; border-left: 4px solid #3498db; padding: 10px; margin: 15px 0;">
+                            <strong>Survey: <t t-out="ctx.get('survey_name')"/></strong>
+                        </div>
+
+                        <div style="margin: 20px 0;">
+                            <strong>Answers:</strong>
+                            <div style="margin-top: 10px;">
+                                <t t-raw="ctx.get('survey_answers_html', '')"/>
+                            </div>
+                        </div>
+
+                        <p style="text-align: center; margin: 25px 0;">
+                            <a t-att-href="ctx.get('survey_print_url')" style="display: inline-block; background-color: #3498db; color: white; padding: 12px 25px;
+                           text-decoration: none; border-radius: 5px; font-weight: bold; text-transform: uppercase;
+                           box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: background-color 0.3s ease;">
+                                View Full Survey
+                            </a>
+                        </p>
+
+                        <p style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ecf0f1;">
+                            Best regards,
+                            <br/>
+                            <strong>
+                                <t t-out="object.company_id.name"/>
+                                Team
+                            </strong>
+                        </p>
+                    </div>
+
+                    <div style="background-color: #f4f4f4; color: #7f8c8d; text-align: center; padding: 10px; font-size: 0.8em; margin-top: 20px;">
+                        ©
+                        <t t-out="ctx.get('year', '2024')"/>
+                        <t t-out="object.company_id.name"/>. All rights reserved.
+                    </div>
+                </div>
+            </t>
+        </field>
+    </record>
+
+    <record id="survey_periodic_reminder_cron" model="ir.cron">
+        <field name="name">Send Periodic Partner Surveys</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">model.send_periodic_survey()</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>
