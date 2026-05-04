@@ -1,0 +1,1 @@
+# backoffice_odoo_survey_partner
