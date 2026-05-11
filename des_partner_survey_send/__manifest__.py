@@ -15,6 +15,12 @@
     'company': 'BackOffice',
     'maintainer': 'BackOffice',
     'website': 'https://www.boffice.cloud/',
+    'images': [
+        'static/description/screenshots/screen_01_contacto.svg',
+        'static/description/screenshots/screen_02_lista.svg',
+        'static/description/screenshots/screen_03_encuesta_generar.svg',
+        'static/description/screenshots/screen_04_envio.svg',
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/partner_survey_send_views.xml',
