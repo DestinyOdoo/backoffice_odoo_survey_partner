@@ -16,6 +16,7 @@
     'maintainer': 'BackOffice',
     'website': 'https://www.boffice.cloud/',
     'images': [
+        'static/description/main_screenshot.png',
         'static/description/screenshots/screen_01_contacto.png',
         'static/description/screenshots/screen_02_lista.png',
         'static/description/screenshots/screen_03_encuesta_generar.png',
