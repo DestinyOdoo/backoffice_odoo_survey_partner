@@ -16,10 +16,10 @@
     'maintainer': 'BackOffice',
     'website': 'https://www.boffice.cloud/',
     'images': [
-        'static/description/screenshots/screen_01_contacto.svg',
-        'static/description/screenshots/screen_02_lista.svg',
-        'static/description/screenshots/screen_03_encuesta_generar.svg',
-        'static/description/screenshots/screen_04_envio.svg',
+        'static/description/screenshots/screen_01_contacto.png',
+        'static/description/screenshots/screen_02_lista.png',
+        'static/description/screenshots/screen_03_encuesta_generar.png',
+        'static/description/screenshots/screen_04_envio.png',
     ],
     'data': [
         'security/ir.model.access.csv',
