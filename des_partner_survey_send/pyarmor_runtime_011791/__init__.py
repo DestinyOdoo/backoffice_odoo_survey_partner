@@ -1,2 +1,2 @@
-# Pyarmor 9.2.4 (pro), 011791, 2026-05-11T14:38:24.950755
+# Pyarmor 9.2.4 (pro), 011791, 2026-05-13T12:46:34.382576
 from odoo.addons.des_partner_survey_send.pyarmor_runtime_011791.pyarmor_runtime import __pyarmor__
