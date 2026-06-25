@@ -1,1 +1,1 @@
-# backoffice_odoo_survey_partner
+# backoffice_odoo_apps

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Generate Survey button next to Test Survey on survey form -->
+    <record id="view_survey_form_inherit_generate" model="ir.ui.view">
+        <field name="name">survey.survey.form.inherit.generate</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_test_survey']" position="after">
+                <button name="action_generate_survey" type="object"
+                        string="Generate Survey" class="btn-secondary"
+                        title="Select a contact and open the survey (real attempt, not test)"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <record id="view_partner_form_inherit_survey_feedback" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.survey.feedback</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="inside">
+                <group string="Survey Feedback">
+                    <field name="enable_survey_feedback"/>
+                    <field name="survey_template_id"
+                           invisible="enable_survey_feedback==False"
+                           domain="[('is_time_limited', '=', False)]"
+                           required="enable_survey_feedback==True"/>
+                    <field name="last_survey_sent_date" readonly="1"/>
+                </group>
+                <group string="Completed Survey to Send">
+                    <field name="survey_user_input_id"
+                           options="{'no_create': True}"
+                           help="Assign a completed survey to send it automatically to this contact"/>
+                    <button name="action_send_completed_survey"
+                            type="object"
+                            string="Send Survey"
+                            icon="fa-envelope"
+                            invisible="not survey_user_input_id or not email"
+                            class="btn-primary"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

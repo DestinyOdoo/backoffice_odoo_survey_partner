@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_survey_send" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.survey.send</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page string="Surveys to Send" name="partner_survey_send">
+                    <field name="partner_survey_send_ids" mode="tree" nolabel="1">
+                        <tree string="Surveys to Send" editable="bottom" create="1" delete="1">
+                            <field name="survey_user_input_id" options="{'no_create': True}" domain="[('state', '=', 'done'), '|', ('assigned', '=', False), ('id', '=', survey_user_input_id)]"/>
+                            <field name="survey_name"/>
+                            <field name="survey_input_state" optional="hide"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'sent'"
+                                   decoration-warning="state == 'pending'"/>
+                            <field name="sent_date"/>
+                            <button name="action_send" type="object" string="Send" icon="fa-envelope"
+                                    invisible="state == 'sent'"
+                                    class="btn-link"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Stat button on partner form -->
+    <record id="view_partner_form_inherit_survey_send_stat" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.survey.send.stat</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object" name="action_view_partner_survey_send"
+                        icon="fa-paper-plane">
+                    <field string="Surveys" name="partner_survey_send_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
